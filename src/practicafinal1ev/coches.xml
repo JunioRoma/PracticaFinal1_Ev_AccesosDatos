@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<coches>
+
+	<coche marca="bmw" modelo="serie1" anioSalida="2015" potencia="180cv" combustible="gasolina">
+		
+		
+		<precio>26.000€</precio>
+		<peso>1.400kg</peso>
+		<estrellasSeguridad>4.5</estrellasSeguridad>
+		<traccion>trasera</traccion>
+		<tipoChasis>turismo</tipoChasis>
+	
+	</coche>
+	
+	
+</coches>
