@@ -11,7 +11,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
 /**
  *
  * @author Junior
@@ -22,13 +21,9 @@ public class dom {
 
     public int guardarDOMcomoFILE(String ruta) {
         try {
-//Crea un fichero llamado salida.xml
             File archivo_xml = new File(ruta);
-//Especifica el formato de salida
             OutputFormat format = new OutputFormat(doc);
-//Especifica que la salida esté indentada.
             format.setIndenting(true);
-//Escribe el contenido en el FILE
             XMLSerializer serializer = new XMLSerializer(new FileOutputStream(archivo_xml), format);
             serializer.serialize(doc);
             return 0;
@@ -94,17 +89,13 @@ public class dom {
         Node ntemp = null;
         int contador = 1;
 
-        //obtiene el valor del primer atributo del nodo(uno en este ejemplo)
         datos[0] = n.getAttributes().item(0).getNodeValue();
 
-        //Obtiene los hijos del libro (titulo y autor)
-        NodeList nodos = n.getChildNodes();
+                NodeList nodos = n.getChildNodes();
 
         for (int i = 0; i < nodos.getLength(); i++) {
             ntemp = nodos.item(i);
             if (ntemp.getNodeType() == Node.ELEMENT_NODE) {
-                //IMPORTANTE: para obtener el texto con el titulo y autor se accede al
-                //nodo TEXT hijo de ntemp y se saca su valor.
                 datos[contador] = ntemp.getChildNodes().item(0).getNodeValue();
                 contador++;
             }
@@ -121,59 +112,46 @@ public class dom {
 
             Node cocheNode = doc.createElement("coche");
 
-            //Al nuevo nodo libro se le añade los atributos
             ((Element) cocheNode).setAttribute("marca", marca);
             ((Element) cocheNode).setAttribute("modelo", modelo);
             ((Element) cocheNode).setAttribute("aniosalida", aniosalida);
             ((Element) cocheNode).setAttribute("potencia", potencia);
             ((Element) cocheNode).setAttribute("combustible", combustible);
 
-            // se crea un nodo tipo Element con nombre 'nombre'(<nombre>)
             Node precioNode = doc.createElement("precio");
 
-            //Se crea un nodo tipo texto con el nombre del nombre
             Node precioTxNode = doc.createTextNode(precio);
 
-            //se añade el nodo de texto con el nombre como hijo del elemento nombre
             precioNode.appendChild(precioTxNode);
 
-            // (<nacionalidad>)
             Node pesoNode = doc.createElement("peso");
             Node pesoTxNode = doc.createTextNode(peso);
             pesoNode.appendChild(pesoTxNode);
 
-            // (<edad>)
             Node seguridadNode = doc.createElement("estrellasSeguridad");
             Node seguridadTxNode = doc.createTextNode(estrellasSeguridad);
             seguridadNode.appendChild(seguridadTxNode);
 
-            // (<titulos>)
             Node traccionNode = doc.createElement("traccion");
             Node traccionTxNode = doc.createTextNode(traccion);
             traccionNode.appendChild(traccionTxNode);
 
-            // (<carreras>)
             Node chasisNode = doc.createElement("tipoChasis");
             Node chasisTxNode = doc.createTextNode(tipoChasis);
             chasisNode.appendChild(chasisTxNode);
 
-            //Se añade a piloto los nodos creados anteriormente
             cocheNode.appendChild(precioNode);
             cocheNode.appendChild(pesoNode);
             cocheNode.appendChild(seguridadNode);
             cocheNode.appendChild(traccionNode);
             cocheNode.appendChild(chasisNode);
 
-            //hijo el nodo libro que ya tiene colgando todos sus hijos y atributos creados antes.
             Node raiz = doc.getChildNodes().item(0);
             raiz.appendChild(cocheNode);
 
             File archivo_xml = archivo;
-//Especifica el formato de salida
             OutputFormat format = new OutputFormat(doc);
-//Especifica que la salida esté indentada.
             format.setIndenting(true);
-//Escribe el contenido en el FILE
             XMLSerializer serializer = new XMLSerializer(new FileOutputStream(archivo_xml), format);
             serializer.serialize(doc);
 

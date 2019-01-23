@@ -82,9 +82,10 @@ public class sax {
         @Override
         public void endElement(String uri, String localName, String qName)
                 throws SAXException {
-            if (qName.equals("piloto")) {
+            if (qName.equals("coche")) {
                 System.out.println("He encontrado el final de un elemento.");
-                cadena_resultado = cadena_resultado + "\n --------------------------";
+                cadena_resultado = cadena_resultado + "\n ------------------------------------------------------------------";
+                cadena_resultado = cadena_resultado + "\n ------------------------------------------------------------------";
             }
         }
 

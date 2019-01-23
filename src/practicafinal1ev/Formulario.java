@@ -5,10 +5,13 @@
  */
 package practicafinal1ev;
 
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +54,24 @@ public class Formulario extends javax.swing.JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             ficheroXml = fileChooser.getSelectedFile();
         }
+    }
+
+    private File guardar() {
+        try {
+            JFileChooser fileChooser = new JFileChooser();
+            File prueba17 = null;
+            fileChooser.setMultiSelectionEnabled(false);
+            fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+            int guardar = fileChooser.showSaveDialog(this);
+            if (guardar == JFileChooser.APPROVE_OPTION) {
+                prueba17 = fileChooser.getSelectedFile();
+            }
+            gesJaxb.guardar_XML_JAXB(prueba17);
+
+        } catch (Exception ex) {
+            System.out.println("No se puede acceder al fichero");
+        }
+        return ficheroXml;
     }
 
 //    private File abrirJFile() {
@@ -181,6 +202,7 @@ public class Formulario extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -379,6 +401,13 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/57003a56bactualizar (2) (1).png"))); // NOI18N
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+
         jMenu1.setText("ABRIR ");
 
         jMenuItem1.setText("ABRIR");
@@ -428,7 +457,7 @@ public class Formulario extends javax.swing.JFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 726, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(BotonEjecutarXml1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -443,30 +472,33 @@ public class Formulario extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(BotonEjecutarXml2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(seguridad)
-                                                    .addComponent(combustible, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(12, 12, 12)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(traccion)
-                                                    .addComponent(precio, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                                    .addComponent(anio))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(peso, javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(potencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                                    .addComponent(tipo)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(BotonEjecutarXml2))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(seguridad)
+                                                        .addComponent(combustible, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGap(12, 12, 12)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(traccion)
+                                                        .addComponent(precio, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                                        .addComponent(anio))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(peso, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(potencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                                        .addComponent(tipo)))))
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4))
@@ -506,7 +538,7 @@ public class Formulario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(MostradorDePanorama)
@@ -521,11 +553,13 @@ public class Formulario extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addGap(8, 8, 8)
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addComponent(BotonEjecutarXml2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(15, 15, 15)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(BotonEjecutarXml2)
+                                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -625,24 +659,27 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void BotonEjecutarXml2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonEjecutarXml2MousePressed
-        String buscar = campoBusqueda.getText();
-        for (int i = 0; i < gesJaxb.pruebaCoche.size(); i++) {
-            if (gesJaxb.pruebaCoche.get(i).getModelo().equals(buscar)) {
-                gesJaxb.pruebaCoche.get(i).setModelo(campoBusqueda.getText());
-                gesJaxb.pruebaCoche.get(i).setMarca(marca.getText());
-                gesJaxb.pruebaCoche.get(i).setAnioSalida(anio.getText());
-                gesJaxb.pruebaCoche.get(i).setPotencia(potencia.getText());
-                gesJaxb.pruebaCoche.get(i).setCombustible(combustible.getText());
-                gesJaxb.pruebaCoche.get(i).setPrecio(precio.getText());
-                gesJaxb.pruebaCoche.get(i).setPeso(peso.getText());
-                gesJaxb.pruebaCoche.get(i).setEstrellasSeguridad(seguridad.getText());
-                gesJaxb.pruebaCoche.get(i).setTraccion(traccion.getText());
-                gesJaxb.pruebaCoche.get(i).setTipoChasis(tipo.getText());
 
-            }
+        guardar();
 
-        }
-        gesJaxb.guardar_XML_JAXB(ficheroXml);
+//        String buscar = campoBusqueda.getText();
+//        for (int i = 0; i < gesJaxb.pruebaCoche.size(); i++) {
+//            if (gesJaxb.pruebaCoche.get(i).getModelo().equals(buscar)) {
+//                gesJaxb.pruebaCoche.get(i).setModelo(campoBusqueda.getText());
+//                gesJaxb.pruebaCoche.get(i).setMarca(marca.getText());
+//                gesJaxb.pruebaCoche.get(i).setAnioSalida(anio.getText());
+//                gesJaxb.pruebaCoche.get(i).setPotencia(potencia.getText());
+//                gesJaxb.pruebaCoche.get(i).setCombustible(combustible.getText());
+//                gesJaxb.pruebaCoche.get(i).setPrecio(precio.getText());
+//                gesJaxb.pruebaCoche.get(i).setPeso(peso.getText());
+//                gesJaxb.pruebaCoche.get(i).setEstrellasSeguridad(seguridad.getText());
+//                gesJaxb.pruebaCoche.get(i).setTraccion(traccion.getText());
+//                gesJaxb.pruebaCoche.get(i).setTipoChasis(tipo.getText());
+//
+//            }
+//
+//        }
+//        gesJaxb.guardar_XML_JAXB(buscar);
 
     }//GEN-LAST:event_BotonEjecutarXml2MousePressed
 
@@ -652,24 +689,27 @@ public class Formulario extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
 
-        gesJaxb.abrir_XML_JAXB(ficheroXml);
-        gesJaxb.recorrerJAXByMostrar();
-        String buscar = campoBusqueda.getText();
-        for (int i = 0; i < gesJaxb.pruebaCoche.size(); i++) {
-            if (gesJaxb.pruebaCoche.get(i).getModelo().equals(buscar)) {
-                campoBusqueda.setText(gesJaxb.pruebaCoche.get(i).getModelo());
-                marca.setText(gesJaxb.pruebaCoche.get(i).getMarca());
-                anio.setText(gesJaxb.pruebaCoche.get(i).getAnioSalida());
-                potencia.setText(gesJaxb.pruebaCoche.get(i).getPotencia());
-                combustible.setText(gesJaxb.pruebaCoche.get(i).getCombustible());
-                precio.setText(gesJaxb.pruebaCoche.get(i).getPrecio());
-                peso.setText(gesJaxb.pruebaCoche.get(i).getPeso());
-                seguridad.setText(gesJaxb.pruebaCoche.get(i).getEstrellasSeguridad());
-                traccion.setText(gesJaxb.pruebaCoche.get(i).getTraccion());
-                tipo.setText(gesJaxb.pruebaCoche.get(i).getTipoChasis());
+        String model = campoBusqueda.getText();
+        try {
+            for (int i = 0; i < gesJaxb.pruebaCoche.size(); i++) {
+
+                if (gesJaxb.pruebaCoche.get(i).getModelo().equals(model)) {
+                    campoBusqueda.setText(gesJaxb.pruebaCoche.get(i).getModelo());
+                    marca.setText(gesJaxb.pruebaCoche.get(i).getMarca());
+                    anio.setText(gesJaxb.pruebaCoche.get(i).getAnioSalida());
+                    potencia.setText(gesJaxb.pruebaCoche.get(i).getPotencia());
+                    combustible.setText(gesJaxb.pruebaCoche.get(i).getCombustible());
+                    precio.setText(gesJaxb.pruebaCoche.get(i).getPrecio());
+                    peso.setText(gesJaxb.pruebaCoche.get(i).getPeso());
+                    seguridad.setText(gesJaxb.pruebaCoche.get(i).getEstrellasSeguridad());
+                    traccion.setText(gesJaxb.pruebaCoche.get(i).getTraccion());
+                    tipo.setText(gesJaxb.pruebaCoche.get(i).getTipoChasis());
+
+                }
 
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 //        ventanaJaxbSax.abrir_XML_JAXB(ficheroXml);
@@ -748,16 +788,19 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel16MousePressed
 
     private void BotonEjecutarXml1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEjecutarXml1ActionPerformed
-        String consultaGeneral = "/coches/coche";
-        panelDeTexto.setText(gesXpath.EjecutaXPath(ficheroXml, consultaGeneral));
+//        String consultaGeneral = "/coches/coche";
+//        panelDeTexto.setText(gesXpath.EjecutaXPath(ficheroXml, consultaGeneral));
+
+        gesXpath.EjecutaXPath(ficheroXml, "/coches/coche");
+        panelDeTexto.setText(gesXpath.salida);
     }//GEN-LAST:event_BotonEjecutarXml1ActionPerformed
 
     private void BotonEjecutarXml1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonEjecutarXml1MousePressed
 
-//        //        String texto = BlocDeConsultas.getText();
-//        //        ventanaXpath.EjecutaXPath(texto);
-//        //
-//        //        panelDeTexto.setText(ventanaXpath.EjecutaXPath(texto));
+////                String texto = BlocDeConsultas.getText();
+////                ventanaXpath.EjecutaXPath(texto);
+////        
+////                panelDeTexto.setText(ventanaXpath.EjecutaXPath(texto));
 //        File fichero = abrirJFile();
 //        String consulta = ""; //Aquí vamos a guardar el parámetro de entrada que le vamos a pasar.
 //        String verModelo = filtrarModelo.getText();  //Variable que vamos a usar en la consulta
@@ -839,8 +882,8 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonEjecutarXml1MousePressed
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-//        gesXpath.ejecutaXpath(archivo, jTextField1.getText());
-//        panelDeTexto.setText(gesXpath.salida);
+        gesXpath.EjecutaXPath(ficheroXml, jTextField1.getText());
+        panelDeTexto.setText(gesXpath.salida);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -857,6 +900,11 @@ public class Formulario extends javax.swing.JFrame {
         String consultaCombustible = "coches/coche/@combustible";
         panelDeTexto.setText(gesXpath.EjecutaXPath(ficheroXml, consultaCombustible));
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        gesasx.abrir_XML_SAX(ficheroXml);
+        panelDeTexto.setText(gesasx.recorrerSAX());
+    }//GEN-LAST:event_jButton5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -906,6 +954,7 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

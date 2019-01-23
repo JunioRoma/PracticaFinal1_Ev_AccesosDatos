@@ -1,6 +1,9 @@
 package practicafinal1ev;
 
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import javaCoches.Coches;
 import javax.xml.bind.JAXBContext;
@@ -15,6 +18,7 @@ public class jaxb {
 
     Coches misCoches;
     List<Coches.Coche> pruebaCoche;
+    File fichero;
 
     public int abrir_XML_JAXB(File fichero) {
         JAXBContext contexto;
@@ -28,7 +32,7 @@ public class jaxb {
 
             //desalizamos el fichero
             misCoches = (Coches) u.unmarshal(fichero);
-            pruebaCoche = (List<Coches.Coche>) misCoches.getCoche();
+            pruebaCoche.add(misCoches.getCoche());
 
             return 0;
 
@@ -39,10 +43,11 @@ public class jaxb {
 
     }
 
-    public int guardar_XML_JAXB(File fichero) {
+    public int guardar_XML_JAXB(File prueba17) {
         JAXBContext contexto;
 
         try {
+         
             //creamos una instancia JAXB
             contexto = JAXBContext.newInstance(Coches.class);
 
@@ -84,5 +89,8 @@ public class jaxb {
         }
         return cadena_resultado;
     }
+    
+    
+    
 
 }

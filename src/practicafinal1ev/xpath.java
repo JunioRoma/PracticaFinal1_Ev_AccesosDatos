@@ -51,7 +51,8 @@ public class xpath {
 //                    salida = salida + "\nTraccion" + nodeList.item(i).getTextContent();
 //                    salida = salida + "\nTipo de Chasis" + nodeList.item(i).getTextContent();
                 } else {
-
+                    
+                    
                     salida = salida + "\n" + nodeList.item(i).getTextContent();
                     salida = salida + "\n-----------------------------";
 
